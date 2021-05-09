@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "546389633073",
+    "firebase_url": "https://indoor-location-se-4383a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "indoor-location-se-4383a",
+    "storage_bucket": "indoor-location-se-4383a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546389633073:android:b845012d3679b9092f8d10",
+        "android_client_info": {
+          "package_name": "com.g8.indoorlocation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546389633073-8kgur05pfhdop0m4v27g3dnma5fo1eep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFwdtR8GxmGCi3G0M_DXl-o6ZhmV7mP5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546389633073-8kgur05pfhdop0m4v27g3dnma5fo1eep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
