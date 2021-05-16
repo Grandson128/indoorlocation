@@ -40,9 +40,9 @@ FirebaseAuth auth;
 /* Define the FirebaseConfig data for config data */
 FirebaseConfig config;
 
-String path = "/Test";
-unsigned long dataMillis = 0;
-int count = 0;
+
+
+bool taskCompleted = false;
 
 void setup()
 {
@@ -77,18 +77,42 @@ void setup()
 
 void loop()
 {
-    if (millis() - dataMillis > 5000)
+
+  if (Firebase.ready() && !taskCompleted)
     {
-        dataMillis = millis();
+        taskCompleted = true;
+
+        String path = "/beacon/1/signal";
+
+        String jsonStr = "";
+
+        FirebaseJson json1;
+        FirebaseJson json2;
+
+        FirebaseJsonData jsonObj;
+
+
+        json1.set("objectIdentifier", "1");
+        json1.set("rssi", "NULL");
+        json2.set("", json1);
+        
+        Serial.println("------------------------------------");
+        Serial.println("JSON Data");
+        json2.toString(jsonStr, true);
+        Serial.println(jsonStr);
+        Serial.println("------------------------------------");
 
         Serial.println("------------------------------------");
-        Serial.println("Set int test...");
+        Serial.println("Set JSON test...");
 
-        String node = path + "/int";
 
-        if (Firebase.RTDB.setAsync(&fbdo, node.c_str(), count++))
+        if (Firebase.RTDB.pushJSON(&fbdo, path.c_str(), &json1))
         {
             Serial.println("PASSED");
+            Serial.println("PATH: " + fbdo.dataPath());
+            Serial.println("TYPE: " + fbdo.dataType());
+            Serial.print("VALUE: ");
+            printResult(fbdo); //see addons/RTDBHelper.h
             Serial.println("------------------------------------");
             Serial.println();
         }
@@ -99,5 +123,33 @@ void loop()
             Serial.println("------------------------------------");
             Serial.println();
         }
+
+        Serial.println("------------------------------------");
+        Serial.println("Get JSON test...");
+
+      
+        if (Firebase.RTDB.get(&fbdo, path.c_str()))
+        {
+            Serial.println("PASSED");
+            Serial.println("PATH: " + fbdo.dataPath());
+            Serial.println("TYPE: " + fbdo.dataType());
+            Serial.print("VALUE: ");
+            if (fbdo.dataType() == "json")
+            {
+                printResult(fbdo); //see addons/RTDBHelper.h
+            }
+
+            Serial.println("------------------------------------");
+            Serial.println();
+        }
+        else
+        {
+            Serial.println("FAILED");
+            Serial.println("REASON: " + fbdo.errorReason());
+            Serial.println("------------------------------------");
+            Serial.println();
+        }
+
+        
     }
 }
