@@ -7,6 +7,11 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import java.lang.StringBuilder
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +24,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }, 1200)
+
+
+
     }
 
     fun gototwo(v: View?) {
