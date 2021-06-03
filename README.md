@@ -8,8 +8,5 @@ The indication of the position should be done on a building plan (blueprint). It
 
 It should be possible to trace a route of the person even on places it has no connectivity and/or beacon coverage.
 
-Requirements:
-support more than one person tracking
-estimation should accurate at least at corridor level (in what corridor)
-detection of "at a beacon" should be detected to at least 1 m proximity and never to more than 2.5 m.
-notification of arrival should be in less than 2s
+Requirements: support more than one person tracking estimation should accurate at least at corridor level (in what corridor) detection of "at a beacon" should be detected to at least 1 m proximity and never to more than 2.5 m. notification of arrival should be in less than 2s
+
