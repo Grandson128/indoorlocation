@@ -39,13 +39,14 @@
         android:id="@+id/btnback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="340dp"
-        android:layout_marginLeft="340dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/btnback"
+        android:onClick="gototwo"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/backpattern"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.814" />
+        app:layout_constraintVertical_bias="0.811" />
 
     <TextView
         android:id="@+id/txtbeacon1"
@@ -122,6 +123,34 @@
 
 
     <TextView
+        android:id="@+id/txtdistance1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Aproximated Distance (m):"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/txtrssi1" />
+
+    <TextView
+        android:id="@+id/distance1"
+        android:layout_width="217dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="null"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/txtdistance1"
+        app:layout_constraintTop_toBottomOf="@+id/rssi1" />
+
+    <TextView
         android:id="@+id/txtrssi2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -150,6 +179,34 @@
         app:layout_constraintTop_toBottomOf="@+id/txtbeacon2" />
 
     <TextView
+        android:id="@+id/txtdistance2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Aproximated Distance (m):"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/txtrssi2" />
+
+    <TextView
+        android:id="@+id/distance2"
+        android:layout_width="217dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="null"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/txtdistance2"
+        app:layout_constraintTop_toBottomOf="@+id/rssi2" />
+
+    <TextView
         android:id="@+id/txtrssi3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -176,5 +233,33 @@
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/txtrssi3"
         app:layout_constraintTop_toBottomOf="@+id/txtbeacon3" />
+
+    <TextView
+        android:id="@+id/txtdistance3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Aproximated Distance (m):"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/txtrssi3" />
+
+    <TextView
+        android:id="@+id/distance3"
+        android:layout_width="217dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-light"
+        android:text="null"
+        android:textColor="@color/grey"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/txtdistance3"
+        app:layout_constraintTop_toBottomOf="@+id/rssi3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

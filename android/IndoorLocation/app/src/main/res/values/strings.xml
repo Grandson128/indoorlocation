@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">IndoorLocation</string>
     <string name="howdy">string</string>
+    <string name="Log_In"><u>Sign In</u></string>
 </resources>

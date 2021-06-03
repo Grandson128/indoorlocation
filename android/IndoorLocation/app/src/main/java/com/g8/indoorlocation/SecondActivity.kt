@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -18,7 +19,10 @@ import com.google.firebase.database.ValueEventListener
 
 class SecondActivity : AppCompatActivity() {
 
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        firebaseAuth = FirebaseAuth.getInstance()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
@@ -37,7 +41,7 @@ class SecondActivity : AppCompatActivity() {
                     var rssi = i.child("rssi").getValue()
                     sb.append("$rssi")
                 }
-                Toast.makeText(this@SecondActivity, "$sb", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@SecondActivity, "$sb", Toast.LENGTH_LONG).show()
                 //var rssiVal=findViewById(R.id.rssi1) as TextView
                 //rssiVal.text=sb.toString()
             }
@@ -110,7 +114,8 @@ class SecondActivity : AppCompatActivity() {
 
     fun showid(v: View?) {
         if (v != null) {
-            Toast.makeText(this, "show id here!", Toast.LENGTH_SHORT).show()
+            firebaseAuth.signOut()
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
