@@ -1,14 +1,21 @@
 package com.g8.indoorlocation
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -16,41 +23,125 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlin.math.pow
 
 class SecondActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId = "com.g8.indoorlocation"
+    private var beaconNum=0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         firebaseAuth = FirebaseAuth.getInstance()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
+        val MEASURED_RSSI = -55
+
         var databaseBeacon = FirebaseDatabase.getInstance().getReference("beacon")
-        var databaseTest = FirebaseDatabase.getInstance().getReference("Test")
-        var databasePosition = FirebaseDatabase.getInstance().getReference("position")
+
 
         var getData = object:ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
             }
             override fun onDataChange(p0: DataSnapshot) {
-                var sb = StringBuilder()
+
+                notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 //get beacon
-                var dataref =p0.child("1").child("signal")
-                for (i in dataref.children) {
-                    var rssi = i.child("rssi").getValue()
-                    sb.append("$rssi")
+                var dataref =p0.child("1").child("signal").child("rssi")
+                var rssi = dataref.getValue().toString().toInt()
+
+                var bcn1=findViewById(R.id.bcn1) as ImageView
+                var bcn1green=findViewById(R.id.bcn1green) as ImageView
+
+                if(rssi>=MEASURED_RSSI){
+                    bcn1green.visibility=View.VISIBLE
+                    bcn1.visibility=View.INVISIBLE
+                    beaconNum=1
                 }
-                //Toast.makeText(this@SecondActivity, "$sb", Toast.LENGTH_LONG).show()
-                //var rssiVal=findViewById(R.id.rssi1) as TextView
-                //rssiVal.text=sb.toString()
+                else{
+                    bcn1green.visibility=View.INVISIBLE
+                    bcn1.visibility=View.VISIBLE
+                }
+
+
+
+
+                dataref =p0.child("2").child("signal").child("rssi")
+                rssi= dataref.getValue().toString().toInt()
+
+                var bcn2=findViewById(R.id.bcn2) as ImageView
+                var bcn2green=findViewById(R.id.bcn2green) as ImageView
+
+                if(rssi>=MEASURED_RSSI){
+                    bcn2green.visibility=View.VISIBLE
+                    bcn2.visibility=View.INVISIBLE
+                    beaconNum=2
+                }
+                else{
+                    bcn2green.visibility=View.INVISIBLE
+                    bcn2.visibility=View.VISIBLE
+                }
+
+
+                dataref =p0.child("3").child("signal").child("rssi")
+                rssi = dataref.getValue().toString().toInt()
+
+                var bcn3=findViewById(R.id.bcn3) as ImageView
+                var bcn3green=findViewById(R.id.bcn3green) as ImageView
+
+                if(rssi>=MEASURED_RSSI){
+                    bcn3green.visibility=View.VISIBLE
+                    bcn3.visibility=View.INVISIBLE
+                    val intent = Intent(this@SecondActivity, SecondActivity::class.java)
+                    val pendingIntent = PendingIntent.getActivity(this@SecondActivity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                    //val contentView = RemoteViews(packageName, R.layout.SecondActivity)
+
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        notificationChannel = NotificationChannel(channelId, "You arrived at beacon 3!", NotificationManager.IMPORTANCE_HIGH)
+                        notificationChannel.enableLights(true)
+                        notificationChannel.lightColor = Color.GREEN
+                        notificationChannel.enableVibration(true)
+                        notificationManager.createNotificationChannel(notificationChannel)
+
+                        builder = Notification.Builder(this@SecondActivity, channelId)
+                            .setSmallIcon(R.drawable.icon)
+                            //.setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
+                            .setContentIntent(pendingIntent)
+                            .setContentText("You arrived at beacon 3!")
+                            .setContentTitle("Indoor Location")
+                    } else {
+
+                        builder = Notification.Builder(this@SecondActivity)
+                            //.setContent(contentView)
+                            .setSmallIcon(R.drawable.icon)
+                            //.setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
+                            .setContentIntent(pendingIntent)
+                            .setContentText("You arrived at beacon 3!")
+                            .setContentTitle("Indoor Location")
+                    }
+                    notificationManager.notify(3, builder.build())
+
+
+
+                }
+                else{
+                    bcn3green.visibility=View.INVISIBLE
+                    bcn3.visibility=View.VISIBLE
+                }
+
             }
         }
 
         databaseBeacon.addValueEventListener(getData)
         databaseBeacon.addListenerForSingleValueEvent(getData)
-        //databaseTest.addValueEventListener(getData)
-        //databaseTest.addListenerForSingleValueEvent(getData)
+
+
 
     }
 

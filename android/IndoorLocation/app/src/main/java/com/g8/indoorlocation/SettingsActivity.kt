@@ -43,13 +43,6 @@ class SettingsActivity : AppCompatActivity() {
                 var rssi = dataref.getValue()
                 var distance = 10.0.pow((MEASURED_RSSI-rssi.toString().toInt()).toDouble()/(10*PATH_LOSS_INDEX))
                 sb.append("$rssi")
-                var xxxxx=(MEASURED_RSSI-rssi.toString().toInt()).toDouble()
-                var yyyyy=10*PATH_LOSS_INDEX
-                var zzzzz=xxxxx/yyyyy
-                var ppppp=10.0.pow(zzzzz)
-                //sbDistance.append("$zzzzz")
-                //sbDistance.append(" / ")
-                //sbDistance.append("$ppppp")
 
                 sbDistance.append("$distance")
 
@@ -90,8 +83,6 @@ class SettingsActivity : AppCompatActivity() {
 
         databaseBeacon.addValueEventListener(getData)
         databaseBeacon.addListenerForSingleValueEvent(getData)
-        //databaseTest.addValueEventListener(getData)
-        //databaseTest.addListenerForSingleValueEvent(getData)
 
          
     }
