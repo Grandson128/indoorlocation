@@ -2,7 +2,7 @@ A pasta do Arduino está organizado por 3 pastas:
 
 indoor_location 		# corresponde ao código final utilizado pelo arduino
 
-Legacy_Token			# código utilizado inicalmente para conectar a um router e fazer push para o Firebase
+Legacy_Token			# código utilizado inicialmente para conectar a um router e fazer push para o Firebase
 
 WiFi_Sniffer			# código intrmédio que resultou no indoor_location 
 
