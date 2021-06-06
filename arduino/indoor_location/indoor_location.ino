@@ -48,6 +48,10 @@ struct clientinfo to_send;
 boolean send_ = false;
 
 
+// CallBack para handle dos pacotes wireless recolhidos ou sniffed.
+// Esta função está sempre a ser chamada sempre que o modulo Wifi tem promiscuous mode enable
+// @param buf   // raw byte buffer packet
+// @param len   // tamanho do buffer
 void promisc_cb(uint8_t *buf, uint16_t len)
 {
   int i = 0;
@@ -92,6 +96,8 @@ void promisc_cb(uint8_t *buf, uint16_t len)
   }
 }
 
+// Esta função é chamada sempre que a variável global _send está igual a true
+// Usa o último ClientInfo guardado na referência global to_send para o firebase
 void sendToFirebase() {
   taskCompleted = false;
   wifi_promiscuous_enable(disable);
@@ -127,6 +133,9 @@ void sendToFirebase() {
     
 }
 
+// setup, faz sincronização do timer recorrendo a um servidor NTP
+// faz o setup da callback que é chamada em promiscuous mode 
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -146,6 +155,7 @@ void setup() {
  
 }
 
+// função para conversão de tempo recebido no NTP para o time do arduino
 void synchronize_time() { delay(100);
   connectToWiFi();
   delay(1000);
@@ -165,6 +175,7 @@ void synchronize_time() { delay(100);
   delay(1000);
 }
 
+// conexão wireless a um AP
 void connectToWiFi() {
   delay(10);
   // We start by connecting to a WiFi network
@@ -186,6 +197,7 @@ void connectToWiFi() {
   //Serial.println(WiFi.localIP());
 }
 
+// função auxiliar
 void printDigits(int digits){
   // utility for digital clock display: prints preceding colon and leading 0
   Serial.print(":");
@@ -194,6 +206,7 @@ void printDigits(int digits){
   Serial.print(digits);
 }
 
+// função auxiliar
 void digitalClockDisplay(){
   // digital clock display of the time
   Serial.print(hour());
@@ -208,6 +221,7 @@ void digitalClockDisplay(){
   Serial.println(); 
 }
 
+// percorre os variados channels e chama o sendToFirebase
 void loop() {
 
   channel = 1;

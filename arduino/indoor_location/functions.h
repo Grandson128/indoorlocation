@@ -12,9 +12,11 @@ extern "C" {
 #include <ESP8266WiFi.h>
 #include "./structures.h"
 
+// raspberry mac address
 uint8_t rasp_addr[ETH_MAC_LEN] = {208, 55, 69, 139, 51, 188};
 int nothing_new = 0;
 
+// Convert um array de inteiros para um hexadexiaml HH.HH.HH.HH.HH.HH
 String formatMac1(uint8_t mac[ETH_MAC_LEN]) {
   String hi = "";
   for (int i = 0; i < ETH_MAC_LEN; i++) {
@@ -25,6 +27,7 @@ String formatMac1(uint8_t mac[ETH_MAC_LEN]) {
   return hi;
 }
 
+// print
 String print_client(clientinfo ci)
 {
   String hi = "";
