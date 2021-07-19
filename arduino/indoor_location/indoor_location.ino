@@ -31,8 +31,8 @@ unsigned int channel = 1;
 
 /* 1. Define the WiFi credentials */
 #ifndef CREDENTIALS
-#define mySSID "MEO-F115E9"
-#define myPASSWORD "11509E56F1"
+#define mySSID "SSID"
+#define myPASSWORD "PASSWORD"
 #endif
 /* 2. If work with RTDB, define the RTDB URL and database secret */
 #define DATABASE_URL "https://indoor-location-se-4383a-default-rtdb.europe-west1.firebasedatabase.app" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
